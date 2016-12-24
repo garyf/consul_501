@@ -26,12 +26,12 @@ describe Consul::ActiveRecord do
       klass = User.disposable_copy do
         authorize_values_for :role
       end
-      user = klass.new
+      user = klass.new(role: 'guest')
       user.assignable_roles.should =~ %w[guest admin]
-      user.should allow_value('guest').for(:role)
-      user.should_not allow_value('invalid-value').for(:role)
+      expect(user.valid?).to be true
+
+      user_0 = klass.new(role: 'invalid')
+      expect(user_0.valid?).to be false
     end
-
   end
-
 end
