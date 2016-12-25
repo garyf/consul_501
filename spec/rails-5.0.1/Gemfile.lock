@@ -2,7 +2,6 @@ PATH
   remote: ../..
   specs:
     consul (0.12.3)
-      edge_rider (>= 0.3.0)
       memoizer
       rails
 
@@ -61,8 +60,6 @@ GEM
     concurrent-ruby (1.0.3)
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
-    edge_rider (0.3.1)
-      activerecord
     erubis (2.7.0)
     execjs (2.7.0)
     ffi (1.9.14)

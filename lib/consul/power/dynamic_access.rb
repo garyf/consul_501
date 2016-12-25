@@ -1,27 +1,7 @@
 module Consul
   module Power
     module DynamicAccess
-
       module InstanceMethods
-
-        def include?(power_name, *args)
-          warn "makandra/consul: #include? is deprececated. Use #include_power? and #include_object? instead."
-          if args.size == 0
-            include_power?(power_name, *args)
-          else
-            include_object?(power_name, *args)
-          end
-        end
-
-        def include!(power_name, *args)
-          warn "makandra/consul: #include! is deprececated. Use #include_power! and #include_object! instead."
-          if args.size == 0
-            include_power!(power_name, *args)
-          else
-            include_object!(power_name, *args)
-          end
-        end
-
         def include_power?(power_name, *context)
           send("#{power_name}?", *context)
         end
@@ -76,11 +56,9 @@ module Consul
           adjective, record = Util.adjective_and_argument(*args)
           name_for_model(adjective, record.class)
         end
-
       end
 
       module ClassMethods
-
         def for_model(*args)
           if current
             current.for_model(*args)
@@ -130,9 +108,7 @@ module Consul
             true
           end
         end
-
       end
-
     end
   end
 end

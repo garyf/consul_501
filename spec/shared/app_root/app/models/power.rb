@@ -39,7 +39,7 @@ class Power
   end
 
   power :notes do
-    Note.scoped(joins: :client)
+    Note.joins(:client)
   end
 
   power :always_true do
