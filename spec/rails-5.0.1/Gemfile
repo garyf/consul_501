@@ -60,4 +60,4 @@ gem 'shoulda-matchers'
 gem 'sqlite3'
 gem 'rspec_candy'
 
-gem 'consul', :path => '../..'
+gem 'consul', path: '../..'

@@ -1,9 +1,6 @@
-require 'spec_helper'
-
-describe DashboardsController, :type => :controller do
-
+describe DashboardsController, type: :controller do
   it "should not raise an error if the checked power is given" do
-    expect { get :show }.to_not raise_error
+    expect { get :show }.not_to raise_error
   end
 
   it 'should define a method #current_power that returns the Power' do
@@ -22,5 +19,4 @@ describe DashboardsController, :type => :controller do
     expect { post :error }.to raise_error(/error during action/)
     Power.current.should be_nil
   end
-
 end

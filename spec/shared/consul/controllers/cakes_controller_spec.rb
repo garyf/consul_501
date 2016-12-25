@@ -1,60 +1,57 @@
-require 'spec_helper'
-
-describe CakesController, :type => :controller do
-
-  describe '#show' do
-    it 'should get the power :cakes' do
+describe CakesController, type: :controller do
+  describe "#show" do
+    it "should get the power :cakes" do
       controller.should_receive(:observe_end_of_association_chain).with(:cakes)
-      get :show, :id => 'id'
+      get :show, params: {id: "id"}
     end
   end
 
-  describe '#index' do
-    it 'should get the power :cakes' do
+  describe "#index" do
+    it "should get the power :cakes" do
       controller.should_receive(:observe_end_of_association_chain).with(:cakes)
       get :index
     end
   end
 
-  describe '#new' do
-    it 'should get the power :creatable_cakes' do
+  describe "#new" do
+    it "should get the power :creatable_cakes" do
       controller.should_receive(:observe_end_of_association_chain).with(:creatable_cakes)
       get :new
     end
   end
 
-  describe '#creatable' do
-    it 'should get the power :creatable_cakes' do
+  describe "#creatable" do
+    it "should get the power :creatable_cakes" do
       controller.should_receive(:observe_end_of_association_chain).with(:creatable_cakes)
       post :create
     end
   end
 
-  describe '#edit' do
-    it 'should get the power :updatable_cakes' do
+  describe "#edit" do
+    it "should get the power :updatable_cakes" do
       controller.should_receive(:observe_end_of_association_chain).with(:updatable_cakes)
-      get :edit, :id => 'id'
+      get :edit, params: {id: "id"}
     end
   end
 
-  describe '#update' do
-    it 'should get the power :updatable_cakes' do
+  describe "#update" do
+    it "should get the power :updatable_cakes" do
       controller.should_receive(:observe_end_of_association_chain).with(:updatable_cakes)
-      put :update, :id => 'id'
+      put :update, params: {id: "id"}
     end
   end
 
-  describe '#destroy' do
-    it 'should get the power :destroyable_cakes' do
+  describe "#destroy" do
+    it "should get the power :destroyable_cakes" do
       controller.should_receive(:observe_end_of_association_chain).with(:destroyable_cakes)
-      delete :destroy, :id => '1'
+      delete :destroy, params: {id: "id"}
     end
   end
 
-  describe '#custom_action' do
-    it 'should get the power :cakes' do
+  describe "#custom_action" do
+    it "should get the power :cakes" do
       controller.should_receive(:observe_end_of_association_chain).with(:cakes)
-      get :custom_action, :id => '1'
+      get :custom_action, params: {id: "id"}
     end
   end
 

@@ -1,13 +1,7 @@
-class CreateUsers < ActiveRecord::Migration
-
-  def self.up
+class CreateUsers < ActiveRecord::Migration[5.0]
+  def change
     create_table :users do |t|
       t.string :role
     end
   end
-
-  def self.down
-    drop_table :users
-  end
-
 end

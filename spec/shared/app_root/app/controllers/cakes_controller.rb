@@ -1,45 +1,44 @@
 class CakesController < ApplicationController
-
-  power :crud => :cakes, :as => :end_of_association_chain
+  power crud: :cakes, as: :end_of_association_chain
 
   def show
     notify_spy
-    render_nothing
+    head :ok
   end
 
   def index
     notify_spy
-    render_nothing
+    head :ok
   end
 
   def new
     notify_spy
-    render_nothing
+    head :ok
   end
 
   def create
     notify_spy
-    render_nothing
+    head :ok
   end
 
   def edit
     notify_spy
-    render_nothing
+    head :ok
   end
 
   def update
     notify_spy
-    render_nothing
+    head :ok
   end
 
   def destroy
     notify_spy
-    render_nothing
+    head :ok
   end
 
   def custom_action
     notify_spy
-    render_nothing
+    head :ok
   end
 
   private
@@ -51,5 +50,4 @@ class CakesController < ApplicationController
   def observe_end_of_association_chain(scope)
     # spy for spec
   end
-
 end

@@ -1,13 +1,7 @@
-class CreateNotes < ActiveRecord::Migration
-
-  def self.up
+class CreateNotes < ActiveRecord::Migration[5.0]
+  def change
     create_table :notes do |t|
       t.integer :client_id
     end
   end
-
-  def self.down
-    drop_table :notes
-  end
-
 end

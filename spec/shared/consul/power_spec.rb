@@ -1,11 +1,9 @@
-require 'spec_helper'
 require 'thread'
 
 describe Consul::Power do
-
   before :each do
     @user = User.create!
-    @deleted_client = Client.create!(:deleted => true)
+    @deleted_client = Client.create!(deleted: true)
     @client1 = Client.create!
     @client1_note1 = @client1.notes.create!
     @client1_note2 = @client1.notes.create!
@@ -18,7 +16,7 @@ describe Consul::Power do
 
     it 'should work with real records' do
       Client.active.should == [@client1, @client2]
-      @client1.notes.should == [@client1_note1, @client1_note2] 
+      @client1.notes.should == [@client1_note1, @client1_note2]
     end
 
   end
@@ -161,7 +159,7 @@ describe Consul::Power do
 
           it 'is used by and bang methods' do
             @user.power.should_not_receive(:database_touched)
-            expect { @user.power.fast_client!(@client1) }.to_not raise_error
+            expect { @user.power.fast_client!(@client1) }.not_to raise_error
             expect { @user.power.fast_client!(@deleted_client) }.to raise_error(Consul::Powerless)
           end
 
@@ -169,7 +167,7 @@ describe Consul::Power do
             @user.power.should_not_receive(:database_touched)
             @user.power.fast_client_note?(@client1, @client1_note1).should == true
             @user.power.fast_client_note?(@client1, @client2_note1).should == false
-            expect { @user.power.fast_client_note!(@client1, @client1_note1) }.to_not raise_error
+            expect { @user.power.fast_client_note!(@client1, @client1_note1) }.not_to raise_error
             expect { @user.power.fast_client_note!(@client1, @client2_note1) }.to raise_error(Consul::Powerless)
           end
 
@@ -198,7 +196,7 @@ describe Consul::Power do
       context 'when no record is given' do
 
         it 'should not raise Consul::Powerless when the power returns a scope (which might or might not match records)' do
-          expect { @user.power.clients! }.to_not raise_error
+          expect { @user.power.clients! }.not_to raise_error
         end
 
       end
@@ -210,11 +208,11 @@ describe Consul::Power do
         end
 
         it 'should not raise Consul::Powerless when the record is outside a scope' do
-          expect { @user.power.client!(@client1) }.to_not raise_error
+          expect { @user.power.client!(@client1) }.not_to raise_error
         end
 
         it 'should work with scopes that have arguments' do
-          expect { @user.power.client_note!(@client1, @client1_note1) }.to_not raise_error
+          expect { @user.power.client_note!(@client1, @client1_note1) }.not_to raise_error
           expect { @user.power.client_note!(@client1, @client2_note1) }.to raise_error(Consul::Powerless)
         end
 
@@ -229,12 +227,12 @@ describe Consul::Power do
       end
 
       it 'should cache scope ids' do
-        @user.power.should_receive(:clients).once.and_return(double('scope', :construct_finder_sql => 'SELECT 1', :to_sql => 'SELECT 1').as_null_object)
+        @user.power.should_receive(:clients).once.and_return(double('scope', construct_finder_sql: 'SELECT 1', to_sql: 'SELECT 1').as_null_object)
         2.times { @user.power.client_ids }
       end
 
       it 'should return ids when the scope joins another table (bugfix)' do
-        expect { @user.power.note_ids }.to_not raise_error
+        expect { @user.power.note_ids }.not_to raise_error
       end
 
       it 'should work with scopes that have arguments' do
@@ -286,7 +284,7 @@ describe Consul::Power do
       context 'when no record is given' do
 
         it 'should not raise Consul::Powerless if the power returns an enumerable (which might or might not be empty)' do
-          expect { @user.power.key_figures! }.to_not raise_error
+          expect { @user.power.key_figures! }.not_to raise_error
         end
 
         it 'should raise Consul::Powerless if the power returns nil' do
@@ -300,7 +298,7 @@ describe Consul::Power do
       context 'with a given record' do
 
         it 'should not raise Consul::Powerless if the power contains the given record' do
-          expect { @user.power.key_figure?('amount') }.to_not raise_error
+          expect { @user.power.key_figure?('amount') }.not_to raise_error
         end
 
         it 'should raise Consul::Powerless if the power does not contain the given record' do
@@ -352,7 +350,7 @@ describe Consul::Power do
       context 'when no record is given' do
 
         it 'should not raise Consul::Powerless when the power returns true' do
-          expect { @user.power.always_true! }.to_not raise_error
+          expect { @user.power.always_true! }.not_to raise_error
         end
 
         it 'should raise Consul::Powerless when the power returns false' do
@@ -415,7 +413,7 @@ describe Consul::Power do
       context 'when no record is given' do
 
         it 'should not raise Consul::Powerless if the power is not nil' do
-          expect { @user.power.api_key! }.to_not raise_error
+          expect { @user.power.api_key! }.not_to raise_error
         end
 
         it 'should raise Consul::powerless if the power is nil' do
