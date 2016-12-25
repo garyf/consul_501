@@ -57,6 +57,5 @@ gem 'assignable_values'
 gem 'rspec'
 gem 'rspec-rails'
 gem 'sqlite3'
-gem 'rspec_candy'
 
 gem 'consul', path: '../..'

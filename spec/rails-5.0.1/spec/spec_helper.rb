@@ -11,8 +11,6 @@ require 'rspec/rails'
 
 # DatabaseCleaner.strategy = :truncation
 
-require 'rspec_candy/helpers'
-
 # Run the migrations
 # print "\033[30m" # dark gray text
 ActiveRecord::Migrator.migrate("#{Rails.root}/db/migrate")

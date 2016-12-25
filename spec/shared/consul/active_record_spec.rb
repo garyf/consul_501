@@ -1,7 +1,7 @@
 describe Consul::ActiveRecord do
   describe ".authorize_values_for" do
     it "should be a shortcut for .assignable_values_for :attribute, through: lambda { ::Power.current }" do
-      klass = Note.disposable_copy
+      klass = Note.dup
       klass
         .should_receive(:assignable_values_for)
         .with(:attribute, option: "option", through: kind_of(Proc))
@@ -11,7 +11,7 @@ describe Consul::ActiveRecord do
     end
 
     it "should not generate a getter and setter for a @power field (change from previous versions)" do
-      klass = Note.disposable_copy do
+      klass = Note.dup do
         authorize_values_for :attribute
       end
       note = klass.new
@@ -21,7 +21,7 @@ describe Consul::ActiveRecord do
 
     it "should obtain assignable values from Power.current" do
       Power.current = Power.new
-      klass = User.disposable_copy do
+      klass = User.dup do
         authorize_values_for :role
       end
       user = klass.new(role: "guest")

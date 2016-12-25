@@ -10,9 +10,8 @@ describe DashboardsController, type: :controller do
 
   it "should set the current power before the request, and nilify it after the request" do
     controller.send(:current_power).should be_nil
-    Power.should_receive_and_execute(:current=).ordered.with(kind_of(Power))
-    Power.should_receive_and_execute(:current=).ordered.with(nil)
     get :show, params: {id: "1"}
+    controller.send(:current_power).should be_nil
   end
 
   it 'should nilify the current power even if the action raises an error' do
