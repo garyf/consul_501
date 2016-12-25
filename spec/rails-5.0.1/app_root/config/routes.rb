@@ -7,10 +7,8 @@ Rails.application.routes.draw do
   end
 
   resources :colors, only: :show
-  resources :dashboards, only: :show
+  resources :dashboards, only: [:show, :create]
   resources :risks, only: :show
   resources :songs, only: [:show, :update]
   resources :users, only: [:show, :update]
-
-  get ':controller(/:action(/:id(.:format)))'
 end

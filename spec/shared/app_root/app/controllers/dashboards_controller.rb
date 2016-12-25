@@ -6,7 +6,7 @@ class DashboardsController < ApplicationController
     head :ok
   end
 
-  def error
+  def create
     raise 'error during action'
   end
 
