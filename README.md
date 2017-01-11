@@ -281,7 +281,6 @@ class Power
   power :client_notes do |client|
     client.notes.where(:state => 'published')
   end
-
 end
 ```
 
@@ -466,7 +465,7 @@ It is often convenient to map a power scope to a private controller method:
 ```rb
 class NotesController < ApplicationController
 
-  power :notes, :as => :note_scope
+  power :notes, as: :note_scope
 
   def show
     @note = note_scope.find(params[:id])
@@ -513,8 +512,8 @@ You can now check and map both powers in the nested `NotesController`:
 ```rb
 class NotesController < ApplicationController
 
-  power :clients, :as => :client_scope
-  power :client_notes, :context => :load_client, :as => :note_scope
+  power :clients, as: :client_scope
+  power :client_notes, :context => :load_client, as: :note_scope
 
   def show
     load_note
@@ -625,7 +624,7 @@ end
 The `authorize_values_for` macro comes with many useful options and details best explained in the [assignable_values README](https://github.com/makandra/assignable_values), so head over there for more. The macro is basically a shortcut for this:
 
 ```rb
-assignable_values_for :field, :through => lambda { Power.current }
+assignable_values_for :field, through: lambda { Power.current }
 ```
 
 Dynamic power access

@@ -3,5 +3,4 @@ class RisksController < ActionController::Base
 
   def show
   end
-
 end

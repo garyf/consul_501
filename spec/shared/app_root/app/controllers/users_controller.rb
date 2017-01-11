@@ -1,13 +1,11 @@
 class UsersController < ApplicationController
-
-  power :always_false, :map => { :show => :always_true }
+  power :always_false, map: {show: :always_true}
 
   def show
-    render_nothing
+    head :ok
   end
 
   def update
-    render_nothing
+    head :ok
   end
-
 end

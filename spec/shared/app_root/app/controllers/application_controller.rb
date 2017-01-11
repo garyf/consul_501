@@ -6,11 +6,4 @@ class ApplicationController < ActionController::Base
   current_power do
     Power.new(User.new)
   end
-
-  private
-
-  def render_nothing
-    render :nothing => true
-  end
-  
 end

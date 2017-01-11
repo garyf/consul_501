@@ -1,13 +1,12 @@
 class DashboardsController < ApplicationController
-  
   power :always_true
 
   def show
     observe(current_power)
-    render_nothing
+    head :ok
   end
 
-  def error
+  def create
     raise 'error during action'
   end
 
@@ -16,5 +15,4 @@ class DashboardsController < ApplicationController
   def observe(object)
     # test spy
   end
-
 end

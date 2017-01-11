@@ -42,9 +42,9 @@ module Consul
     end
 
     def default_power_ids(power_name, *args)
-      scope = send(power_name, *args)
+      relation = send(power_name, *args)
       database_touched
-      scope.collect_ids
+      relation.pluck(:id)
     end
 
     def powerless!(*args)

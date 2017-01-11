@@ -3,11 +3,7 @@ module Consul
     extend self
 
     def scope_selects_all_records?(scope)
-      if Rails.version.to_i < 3
-        scope = scope.scoped({})
-      else
-        scope = scope.scoped
-      end
+      scope = scope.all
       scope_sql = scope.to_sql
       quoted_table_name = Regexp.quote(scope.connection.quote_table_name(scope.table_name))
       all_sql_pattern = /\ASELECT (#{quoted_table_name}\.)?\* FROM #{quoted_table_name}\z/
@@ -15,35 +11,11 @@ module Consul
     end
 
     def scope?(value)
-      value.respond_to?(:scoped)
+      value.respond_to?(:all)
     end
 
     def collection?(value)
       value.is_a?(Array) || value.is_a?(Set)
-    end
-
-    def define_scope(klass, name, lambda)
-      if Rails.version.to_i < 4 # Rails 2/3
-        scope_definition = Rails.version.to_i < 3 ? :named_scope : :scope
-        klass.send scope_definition, name, lambda
-      else
-        klass.send :scope, name, lambda { |*args|
-          options = lambda.call(*args)
-          klass.scoped(options.slice *EdgeRider::Scoped::VALID_FIND_OPTIONS)
-        }
-      end      
-    end
-    
-    # This method does not support dynamic default scopes via lambdas
-    # (as does #define_scope), because it is currently not required.
-    def define_default_scope(klass, conditions)
-      if Rails.version.to_i < 4 # Rails 2/3
-        klass.send :default_scope, conditions
-      else
-        klass.send :default_scope do
-          klass.scoped(conditions)
-        end
-      end
     end
 
     def adjective_and_argument(*args)
@@ -56,7 +28,5 @@ module Consul
       end
       [adjective, record]
     end
-
   end
 end
-
