@@ -823,7 +823,8 @@ Development
 Test applications for various Rails versions lives in `spec`. You can run specs from the project root by saying:
 
 ```
-bundle exec rake all:spec
+rake all:bundle
+rake all:spec
 ```
 
 If you would like to contribute:

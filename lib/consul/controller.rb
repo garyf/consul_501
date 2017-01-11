@@ -44,7 +44,7 @@ module Consul
         if Rails.version.to_i < 4
           skip_before_filter :unchecked_power, options
         else
-          skip_before_action :unchecked_power , options.merge(raise: false)
+          skip_before_action :unchecked_power, options.merge(raise: false)
         end
       end
 
